@@ -8,9 +8,8 @@ class Aplicacion:
 
         NumeroParticulas = 3
         TiempoTotal = 20
-        gsim =GSimulacion(NumeroParticulas,TiempoTotal,self.ventana1)
-        gsim.start_embedded()
-
+        gsim =GSimulacion(NumeroParticulas,TiempoTotal,self.ventana1).start()
+        #gsim.start_embedded()
 
         #self.fig = Figure()
         #self.graph = FigureCanvasTkAgg(self.fig, master=self.ventana1)
@@ -20,4 +19,4 @@ class Aplicacion:
 aplicacion1=Aplicacion()
 
 
-
+#

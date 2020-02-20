@@ -6,12 +6,14 @@ from matplotlib.figure import Figure
 import time
 from mpl_toolkits import mplot3d
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import threading
 
 pausa = 0.02
 
-class GSimulacion:
+class GSimulacion(threading.Thread):
         
     def __init__(self, NumParticulas, tiempoTot, ventana):
+        threading.Thread.__init__(self)
         self.ventana = ventana
         self.N = NumParticulas
         self.tiempoTot = tiempoTot
@@ -117,7 +119,7 @@ class GSimulacion:
         for i in range (0,self.N):#update vel and pos
                 self.particulas[i].actualizaVelocidadYPosicion(self.deltat)        
 
-    def start(self):
+    def start_(self):
         self.cabecera()
         
         while self.tiempo <= self.tiempoTot: 
@@ -150,3 +152,16 @@ class GSimulacion:
         # plt.plot()
         # plt.close('all')
 
+    def run(self):
+        self.cabecera()
+        
+        while self.tiempo <= self.tiempoTot: 
+            # print ("Timepo:", self.tiempo)
+            self.printParticulas()
+            self.pasoSimulacion()
+            self.ventana.after_idle(self.refrescaParticulas)
+            self.tiempo += self.deltat
+ 
+        print ("Fin particulas")
+        # plt.plot()
+        # plt.close('all')
