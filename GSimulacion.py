@@ -73,7 +73,7 @@ class GSimulacion(threading.Thread):
         self.grafico = self.ax.scatter([],[],[],c='r',marker='o')
         #plt.draw()
         self.graph = FigureCanvasTkAgg(self.fig, master=self.ventana)
-        self.graph.get_tk_widget().pack(side="top",fill='both',expand=True) 
+        self.graph.get_tk_widget().grid(column=0, row=1) 
 
 
 
