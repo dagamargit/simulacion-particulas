@@ -1,14 +1,18 @@
 from particulaMasa import *
 from random import random, seed
 from math import sqrt
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 import time
 from mpl_toolkits import mplot3d
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
 pausa = 0.02
 
 class GSimulacion:
         
-    def __init__(self, NumParticulas, tiempoTot):
+    def __init__(self, NumParticulas, tiempoTot, ventana):
+        self.ventana = ventana
         self.N = NumParticulas
         self.tiempoTot = tiempoTot
         self.particulas = []
@@ -56,8 +60,8 @@ class GSimulacion:
             self.particulas[i].masa = 1.0e5
 
     def preparaGrafico(self):
-        plt.ion()
-        self.fig = plt.figure()
+        #DGM plt.ion()
+        self.fig = Figure()
         self.ax = self.fig.add_subplot(111,projection='3d')
 
         self.ax.set_xlim(-2.5,2.5)
@@ -65,7 +69,10 @@ class GSimulacion:
         self.ax.set_zlim(-2.5,2.5)
 
         self.grafico = self.ax.scatter([],[],[],c='r',marker='o')
-        plt.draw()
+        #plt.draw()
+        self.graph = FigureCanvasTkAgg(self.fig, master=self.ventana)
+        self.graph.get_tk_widget().pack(side="top",fill='both',expand=True) 
+
 
 
     def refrescaParticulas(self):
@@ -78,8 +85,8 @@ class GSimulacion:
         # plt.title("Partículas. Tiempo= "+ str(self.tiempo))
         self.grafico = self.ax.scatter(x,y,z,c=col,marker='o')
         # self.ax.view_init(30, 30)
-        plt.draw()
-        plt.pause(pausa)
+        #plt.draw()
+        #plt.pause(pausa)
 
     def printParticulas(self):
         for i in range(0,self.N):
