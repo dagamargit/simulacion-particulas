@@ -9,7 +9,7 @@ class Aplicacion:
         NumeroParticulas = 3
         TiempoTotal = 20
         gsim =GSimulacion(NumeroParticulas,TiempoTotal,self.ventana1)
-        gsim.start()
+        gsim.start_embedded()
 
 
         #self.fig = Figure()

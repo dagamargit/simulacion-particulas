@@ -86,6 +86,7 @@ class GSimulacion:
         self.grafico = self.ax.scatter(x,y,z,c=col,marker='o')
         # self.ax.view_init(30, 30)
         #plt.draw()
+        self.fig.canvas.draw()
         #plt.pause(pausa)
 
     def printParticulas(self):
@@ -130,4 +131,22 @@ class GSimulacion:
         # plt.plot()
         # plt.close('all')
 
+
+    def start_embedded(self):
+        self.cabecera()
+        self.ventana.after(int(self.deltat*1000),self.refresca)
+
+    def refresca(self):        
+        if self.tiempo <= self.tiempoTot:
+            print('paso: '+str(self.tiempo)+' '+str(self.tiempoTot)) 
+            self.ventana.after(int(self.deltat*1000),self.refresca)
+            # print ("Timepo:", self.tiempo)
+            self.printParticulas()
+            self.pasoSimulacion()
+            self.refrescaParticulas()
+            self.tiempo += self.deltat
+ 
+        #print ("Fin particulas")
+        # plt.plot()
+        # plt.close('all')
 
