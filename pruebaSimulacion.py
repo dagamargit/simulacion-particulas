@@ -40,16 +40,19 @@ class Aplicacion:
         self.entry2.grid(column=1, row=1, padx=4, pady=4)
 
         self.labelframe2=ttk.Frame(self.ventana1)        
-        self.labelframe2.grid(column=0, row=1)        
+        self.labelframe2.grid(column=0, row=1)    
+        self.salvar = False   
+        self.chk1 = ttk.Checkbutton(self.labelframe2, text="Guardar Simulación", var =self.salvar)
+        self.chk1.grid(column=0,row=0)
         self.boton=tk.Button(self.labelframe2,text="Comenzar",command=self.comenzar_simulacion)
-        self.boton.grid(column=0,row=0)
+        self.boton.grid(column=2,row=0)
 
 
 
     def comenzar_simulacion(self):
         NumeroParticulas=int(self.datoTemp.get())
         TiempoTotal=int(self.datoTiempoTotal.get())
-        gsim = GSimulacion(NumeroParticulas,TiempoTotal,self.ventana1).start()
+        gsim = GSimulacion(NumeroParticulas,TiempoTotal,self.ventana1, self.salvar).start()
 
 
 aplicacion1=Aplicacion()
